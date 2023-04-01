@@ -7,12 +7,19 @@
  * @copyright Copyright (c) 2022
  **************************************************/
 #include <stdio.h>
-int main(int argc, char *argv[])
-{ int   c;
-  while ((c = getc(stdin)) != EOF)
-    if (putc(c, stdout) == EOF)
-    { fprintf(stderr, "output error\n"); return 1; }
-  if (ferror(stdin))
-  { fprintf(stderr, "input error\n"); return 1; }
+int main(int argc, char *argv[]) {
+  int c;
+  while ((c = getc(stdin)) != EOF) {
+    if (putc(c, stdout) == EOF) {
+      fprintf(stderr, "output error\n");
+      return 1;
+    }
+  }
+
+  if (ferror(stdin)) {
+    fprintf(stderr, "input error\n");
+    return 1;
+  }
+  
   return 0;
 }

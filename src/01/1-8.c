@@ -6,11 +6,11 @@
  * @date 2022-10-20
  * @copyright Copyright (c) 2022
  **************************************************/
-#include <stdio.h>
 #include <errno.h>
+#include <stdio.h>
 #include <string.h>
-int main(int argc, char *argv[])
-{ fprintf(stderr, "EACCES: %s\n", strerror(EACCES));
+int main(int argc, char *argv[]) {
+  fprintf(stderr, "EACCES: %s\n", strerror(EACCES));
   errno = ENOENT;
   perror(argv[0]);
   return 0;
