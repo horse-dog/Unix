@@ -22,10 +22,22 @@ int main(void)
     { fprintf(stderr, "fork error\n");
       return 1;
     }
-    else if (pid > 0)
+    else if (pid > 0) {
+      printf
+      (
+        "first child, pid = %ld, ppid = %ld, pgid = %ld, sid = %ld\n",
+        (long)getpid(), (long)getppid(), (long)getpgrp(), (long)getsid(getpid())
+      );
       exit(0);
-    printf("second child, pid = %ld, parent pid = %ld\n", (long)getpid(), (long)getppid());
-    sleep(2);
+    }
+
+    setsid();
+    printf
+    (
+      "second child, pid = %ld, ppid = %ld, pgid = %ld, sid = %ld\n",
+      (long)getpid(), (long)getppid(), (long)getpgrp(), (long)getsid(getpid())
+    );
+    sleep(10); /* simulate long time process */
     exit(0);
   }
 
@@ -34,5 +46,10 @@ int main(void)
     return 1;
   }
   /* do our own work... */
+  printf
+  (
+    "parent, pid = %ld, ppid = %ld, pgid = %ld, sid = %ld\n",
+    (long)getpid(), (long)getppid(), (long)getpgrp(), (long)getsid(getpid())
+  );
   return 0;
 }

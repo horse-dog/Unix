@@ -8,8 +8,9 @@
  **************************************************/
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
-static void charatatime(char*);
+static void charatatime(const char*);
 
 int main(void)
 { pid_t pid;
@@ -24,8 +25,8 @@ int main(void)
   return 0;
 }
 
-static void charatatime(char *str)
-{ volatile char *ptr;
+static void charatatime(const char *str)
+{ volatile const char *ptr;
   volatile int c;
   setbuf(stdout, NULL);
   for (ptr = str; (c = *ptr++) != 0; )

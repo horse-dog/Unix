@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <signal.h>
+#include <sys/wait.h>
 
 static volatile sig_atomic_t sigflag;
 static sigset_t newmask, oldmask, zeromask;
@@ -50,7 +51,7 @@ void WAIT_CHILD()
   sigprocmask(SIG_SETMASK, &oldmask, NULL);
 }
 
-static void charatatime(char*);
+static void charatatime(const char*);
 
 int main(void)
 { pid_t pid;
@@ -70,8 +71,8 @@ int main(void)
   return 0;
 }
 
-static void charatatime(char *str)
-{ volatile char *ptr;
+static void charatatime(const char *str)
+{ volatile const char *ptr;
   volatile int c;
   setbuf(stdout, NULL);
   for (ptr = str; (c = *ptr++) != 0; )
